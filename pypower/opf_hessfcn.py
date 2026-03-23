@@ -101,7 +101,7 @@ def opf_hessfcn(x, lmbda, om, Ybus, Yf, Yt, ppopt, il=None, cost_mult=1.0):
     d2f_dPg2 = zeros(ng)#sparse((ng, 1))               ## w.r.t. p.u. Pg
     d2f_dQg2 = zeros(ng)#sparse((ng, 1))               ## w.r.t. p.u. Qg
     ipolp = find(pcost[:, MODEL] == POLYNOMIAL)
-    if len(ipol):
+    if len(ipolp):
         d2f_dPg2[ipolp] = \
             baseMVA**2 * polycost(pcost[ipolp, :], Pg[ipolp] * baseMVA, 2)
     if qcost.any():          ## Qg is not free
