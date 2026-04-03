@@ -7,7 +7,7 @@
 
 from os.path import dirname, join
 
-from numpy import array, zeros, r_, in1d, vstack, flatnonzero as find
+from numpy import array, zeros, r_, isin, vstack, flatnonzero as find
 
 from pypower.loadcase import loadcase
 from pypower.isload import isload
@@ -41,7 +41,7 @@ def t_total_load(quiet=False):
     lda = [None] * 3
     for k in range(3):
         a[k] = find(ppc['bus'][:, BUS_AREA] == k + 1)  ## buses in area k
-        tmp = find( in1d(ppc['gen'][ld, GEN_BUS] - 1, a[k]) )
+        tmp = find( isin(ppc['gen'][ld, GEN_BUS] - 1, a[k]) )
         lda[k] = ld[tmp]                       ## disp loads in area k
 
     area = [None] * 3

@@ -7,7 +7,7 @@
 
 from sys import stderr
 
-from numpy import array, zeros, arange, in1d, ix_
+from numpy import array, zeros, arange, isin, ix_
 from numpy import flatnonzero as find
 
 from scipy.sparse import csr_matrix as sparse
@@ -179,7 +179,7 @@ def scale_load(load, bus, gen=None, load_zone=None, opt=None):
         for k in range(len(scale)):
             idx = find(load_zone == k + 1)
             gbus = gen[ld, GEN_BUS].astype(int)
-            i = find( in1d(e2i[gbus], idx) )
+            i = find( isin(e2i[gbus], idx) )
             ig = ld[i]
 
             gen[ix_(ig, [PG, PMIN])] = gen[ix_(ig, [PG, PMIN])] * scale[k]
